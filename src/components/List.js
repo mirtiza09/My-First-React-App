@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 function Task(props) {
 	
 	console.log(props);
@@ -31,9 +33,24 @@ function Task(props) {
 
 function List(props) {
 
+	const [newTask, setNewTask] = useState("");
+	function onChange(event)
+	{
+		setNewTask(event.target.value);
+	}
+
+	function onClick()
+	{
+		props.setTasks(tasks => [...tasks, { id:tasks.length+1,
+											description: newTask,
+											completed:false}])
+	}
+
 	return (
 		<div>
 			<h1>{ props.heading }</h1>
+			<b>Add Task</b><input type = "text" placeholder = "Add a new task" onChange = {onChange}/>
+			<button type = "button" onClick = {onClick}>Add</button>
 			<ul>
 				{ props.tasks.map(task => 
 				<Task
