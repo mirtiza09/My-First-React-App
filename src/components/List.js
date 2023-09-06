@@ -16,14 +16,15 @@ function Task(props) {
 		}));
 	}
 	
+	function onClick() {
+		props.setTasks (tasks => tasks.filter (task => task.id !== props.id));
+	}
+
 	return (
 		<li>
+			<button type = "button" onClick = {onClick}>X</button>
 			{ props.description } 
-			<input 
-			type="checkbox" 
-			checked={props.completed}
-			onChange = {onChange} 
-			/>
+			<input type = "checkbox" checked = {props.completed} onChange = {onChange}/>
 		</li>
 	);
 }
